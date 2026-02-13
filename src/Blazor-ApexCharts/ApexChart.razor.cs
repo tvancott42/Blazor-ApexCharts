@@ -662,16 +662,27 @@ namespace ApexCharts
         {
             if (ShouldFixDataSelection())
             {
-                if (Options.Tooltip == null) { Options.Tooltip = new Tooltip(); }
                 if (Options.Markers == null) { Options.Markers = new Markers(); }
 
-                if (Options.Markers.Size == null || !Options.Markers.Size.Any() || Options.Markers.Size.Any(x => x <= 0))
+                // Only set marker size if the user hasn't configured it at all.
+                // Respect explicit Size=0 (hover-only markers) and other user values.
+                if (Options.Markers.Size == null || !Options.Markers.Size.Any())
                 {
                     Options.Markers.Size = 5;
                 }
 
-                Options.Tooltip.Intersect = true;
-                Options.Tooltip.Shared = false;
+                // Only set tooltip defaults if the user hasn't explicitly configured them
+                if (Options.Tooltip == null) { Options.Tooltip = new Tooltip(); }
+
+                if (Options.Tooltip.Intersect == null)
+                {
+                    Options.Tooltip.Intersect = true;
+                }
+
+                if (Options.Tooltip.Shared == null)
+                {
+                    Options.Tooltip.Shared = false;
+                }
             }
         }
 
