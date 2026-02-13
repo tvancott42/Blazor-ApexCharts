@@ -4991,6 +4991,7 @@ namespace ApexCharts
         /// <summary>
         /// When turned on, local DateTime is converted into UTC. Turn it off if you supply date with timezone info and want to preserve it.
         /// </summary>
+        [JsonPropertyName("datetimeUTC")]
         public bool? DatetimeUTC { get; set; }
 
         /// <summary>
